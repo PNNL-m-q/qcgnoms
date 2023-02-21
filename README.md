@@ -45,3 +45,8 @@ cat pred_qc2.ms
 - pandas
 - matplotlib
 - numpy
+
+## Citation
+QC-GN<sup>2</sup>oMS<sup>2</sup>: a Graph Neural Net for High Resolution Mass Spectra Prediction
+Richard Overstreet, Ethan King, Julia Nguyen, Danielle Ciesielski
+bioRxiv 2023.01.16.524269; doi: https://doi.org/10.1101/2023.01.16.524269 
