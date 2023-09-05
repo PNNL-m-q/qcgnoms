@@ -32,8 +32,8 @@ def smi_to_data(smiles):
         idx2=bond.GetEndAtomIdx()
         atom1=bond.GetBeginAtom()
         atom2=bond.GetEndAtom()
-        if atom1.GetMass() == 1.008 or atom2.GetMass() == 1.008:
-            continue
+        #if atom1.GetMass() == 1.008 or atom2.GetMass() == 1.008:
+        #    continue
         A=np.append(A,idx1)
         B=np.append(B,idx2)
         A=np.append(A,idx2)

@@ -14,6 +14,7 @@ import networkx as nx
 #load data
 qc = pd.read_pickle(sys.argv[1])
 CE = float(sys.argv[2])
+weights = sys.argv[3]
 
 #gnn_weights=sys.argv[3]
 
@@ -140,7 +141,8 @@ model = GCN(hidden_channels=128, at_channels=128)
 # model.load_state_dict(torch.load(gnn_weights))
 # model.to(device)
 
-gnn_weights=["../weights/qc2_1.model"]
+#gnn_weights=["../weights/qc2_1.model"]
+gnn_weights=[weights]
 
 for i,t in enumerate(mols_to_pred):
     msout = open("pred_qc2.ms", "w")
@@ -157,6 +159,7 @@ for i,t in enumerate(mols_to_pred):
         pred = pred[0]
         pred=np.divide(pred,np.max(pred))
         pred[pred<0.0] = 0
+        pred = pred**4
         #print(pred)
         pred_series=np.vstack((pred_series,pred))
     pred_mz, pred_i = vec_to_spec(np.average(pred_series,axis=0))
