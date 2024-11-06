@@ -32,8 +32,8 @@ def smi_to_data(smiles):
         idx2=bond.GetEndAtomIdx()
         atom1=bond.GetBeginAtom()
         atom2=bond.GetEndAtom()
-        #if atom1.GetMass() == 1.008 or atom2.GetMass() == 1.008:
-        #    continue
+        # if atom1.GetMass() == 1.008 or atom2.GetMass() == 1.008:
+        #     continue
         A=np.append(A,idx1)
         B=np.append(B,idx2)
         A=np.append(A,idx2)
@@ -65,16 +65,20 @@ if in_pkl.endswith('.pkl'):
     df = pd.read_pickle(in_pkl)
 elif in_pkl.endswith('.csv'):
     df = pd.read_csv(in_pkl)
+elif in_pkl.endswith('.xlsx'):
+    df = pd.read_excel(in_pkl)
 
+    
 df_smiles = pd.unique(df['Smiles'])
 
 N = len(df)
 
 for i, smiles in enumerate(df_smiles):
     if smiles is not None:
-        print("STATUS:", i, smiles)
+        print("STATUS:", i, smiles, type(smiles))
         x, ei, ea = smi_to_data(smiles)
         if x is not None:
-            df_abf = df_abf.append({'smiles':smiles, 'x':x, 'edge_index':ei, 'edge_attr':ea},ignore_index=True)        
+            new_row = pd.DataFrame({'smiles': [smiles], 'x': [x], 'edge_index': [ei], 'edge_attr': [ea]})
+            df_abf = pd.concat([df_abf, new_row], ignore_index=True)  
 
 df_abf.to_pickle(out_pkl)
