@@ -8,14 +8,22 @@
   - qc2_db.py : calculates BDE features for the QC2 model and stores them in a pickle file
 - Run the prediction script with the associated model and database
   - pred_afb.py : predict a spectra using the QC2 model
+
+
+- Install:
+```
+git clone https://github.com/PNNL-m-q/qcgnoms.git
+cd qcgnoms
+mamba env create -f qcgnoms.yml
+conda activate qcgnoms
+pip install .
+```
+
 - Example:
 ```
-cd weights/
-cat qc2_1.model.a* > qc2_1.model
-cd ../example
-python ../qc2_db.py example.csv ex.pkl
-python ../pred_qc2.py ./ex.pkl 30
-cat pred_qc2.ms
+$ python
+>>> from qcgnoms import predict_msms
+mz, itn = predict_msms("CC(C)/C=C/CCCCC(=O)NCC1=CC(=C(C=C1)O)OC", 45)
 ```
 
 ## Training:
